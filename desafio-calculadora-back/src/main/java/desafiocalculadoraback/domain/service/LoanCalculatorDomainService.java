@@ -53,6 +53,7 @@ public class LoanCalculatorDomainService implements CalculateLoanUseCase {
         List<ScheduleRow> schedule = new ArrayList<>();
         BigDecimal balance = loan.getAmount();
         BigDecimal totalInterest = BigDecimal.ZERO;
+        BigDecimal accumulatedInterest = BigDecimal.ZERO;
         LocalDate previousDate = loan.getInitialDate();
         int currentInstallment = 1;
 
@@ -69,20 +70,23 @@ public class LoanCalculatorDomainService implements CalculateLoanUseCase {
                 ));
             } else {
                 long days = ChronoUnit.DAYS.between(previousDate, date);
-                BigDecimal interest = balance
-                        .multiply(loan.getInterestRate())
-                        .divide(BigDecimal.valueOf(100), 10, RoundingMode.HALF_UP)
-                        .multiply(BigDecimal.valueOf(days))
-                        .divide(BigDecimal.valueOf(360), 2, RoundingMode.HALF_UP);
+                double rate = loan.getInterestRate().doubleValue() / 100.0;
+                double fraction = (double) days / 360.0;
+                double factor = Math.pow(1.0 + rate, fraction) - 1.0;
+                BigDecimal currentInterest = balance.multiply(BigDecimal.valueOf(factor));
 
-                totalInterest = totalInterest.add(interest);
+                accumulatedInterest = accumulatedInterest.add(currentInterest);
+                totalInterest = totalInterest.add(currentInterest);
 
                 boolean isPayment = paymentDates.contains(date);
                 BigDecimal currentAmortization = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+                BigDecimal rowInterest = currentInterest;
 
                 if (isPayment) {
                     currentAmortization = (currentInstallment == installmentsCount) ? balance : amortization;
                     balance = balance.subtract(currentAmortization);
+                    rowInterest = accumulatedInterest;
+                    accumulatedInterest = BigDecimal.ZERO;
                 }
 
                 schedule.add(new ScheduleRow(
@@ -90,8 +94,8 @@ public class LoanCalculatorDomainService implements CalculateLoanUseCase {
                         isPayment ? "PAYMENT" : "MONTH_END",
                         isPayment ? currentInstallment++ : null,
                         days,
-                        interest,
-                        currentAmortization,
+                        rowInterest.setScale(2, RoundingMode.HALF_UP),
+                        currentAmortization.setScale(2, RoundingMode.HALF_UP),
                         balance.setScale(2, RoundingMode.HALF_UP)
                 ));
             }

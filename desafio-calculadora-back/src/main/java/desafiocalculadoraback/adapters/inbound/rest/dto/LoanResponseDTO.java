@@ -30,7 +30,7 @@ public record LoanResponseDTO(
         @Schema(description = "Quantidade total de parcelas", example = "6")
         Integer installmentsCount,
 
-        @Schema(description = "Total de juros acumulados", example = "58.43")
+        @Schema(description = "Total de juros acumulados", example = "57.90")
         BigDecimal totalInterest,
 
         @Schema(description = "Cronograma detalhado de eventos e parcelas")

@@ -47,7 +47,7 @@ class LoanControllerTest {
         );
 
         Loan mockLoan = new Loan(1L, requestDTO.initialDate(), requestDTO.finalDate(), requestDTO.firstPaymentDate(), requestDTO.amount(), requestDTO.interestRate());
-        LoanResult mockResult = new LoanResult(mockLoan, 6, new BigDecimal("58.43"), List.of());
+        LoanResult mockResult = new LoanResult(mockLoan, 6, new BigDecimal("57.90"), List.of());
 
         when(calculateLoanUseCase.calculateAndSave(any(Loan.class))).thenReturn(mockResult);
 
@@ -57,7 +57,7 @@ class LoanControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.installmentsCount").value(6))
-                .andExpect(jsonPath("$.totalInterest").value(58.43));
+                .andExpect(jsonPath("$.totalInterest").value(57.90));
     }
 
     @Test
@@ -79,7 +79,7 @@ class LoanControllerTest {
     @Test
     void shouldFindLoanById() throws Exception {
         Loan mockLoan = new Loan(1L, LocalDate.of(2024, 1, 1), LocalDate.of(2024, 6, 30), LocalDate.of(2024, 1, 31), new BigDecimal("10000.00"), new BigDecimal("2.00"));
-        LoanResult mockResult = new LoanResult(mockLoan, 6, new BigDecimal("58.43"), List.of());
+        LoanResult mockResult = new LoanResult(mockLoan, 6, new BigDecimal("57.90"), List.of());
 
         when(calculateLoanUseCase.findById(1L)).thenReturn(mockResult);
 
