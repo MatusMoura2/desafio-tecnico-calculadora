@@ -27,7 +27,7 @@ public record LoanRequestDTO(
         @Positive(message = "O valor do empréstimo deve ser positivo.")
         BigDecimal amount,
 
-        @Schema(description = "Taxa de juros ao mês (%)", example = "2.00")
+        @Schema(description = "Taxa de juros ao ano (%)", example = "7.00")
         @NotNull(message = "A taxa de juros é obrigatória.")
         @Positive(message = "A taxa de juros deve ser positiva.")
         BigDecimal interestRate

@@ -69,7 +69,9 @@ public class LoanController {
                                 row.getType(),
                                 row.getInstallmentNumber(),
                                 row.getDays(),
-                                row.getInterest(),
+                                row.getInterestProvision(),
+                                row.getInterestAccumulated(),
+                                row.getInterestPaid(),
                                 row.getAmortization(),
                                 row.getBalance()
                         ))

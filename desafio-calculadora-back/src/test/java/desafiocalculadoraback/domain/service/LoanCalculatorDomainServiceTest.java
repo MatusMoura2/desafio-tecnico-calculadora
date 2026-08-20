@@ -45,7 +45,7 @@ class LoanCalculatorDomainServiceTest {
         LoanResult result = domainService.calculateAndSave(loan);
 
         assertNotNull(result);
-        assertEquals(6, result.getInstallmentsCount());
+        assertEquals(5, result.getInstallmentsCount());
         assertNotNull(result.getSchedule());
         assertFalse(result.getSchedule().isEmpty());
 

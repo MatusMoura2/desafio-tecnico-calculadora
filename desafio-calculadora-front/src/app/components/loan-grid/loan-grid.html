@@ -36,14 +36,14 @@
         <tr *ngFor="let row of result.schedule; let i = index" [class.highlight-row]="row.type === 'PAYMENT'">
           <td class="font-medium">{{ formatDateString(row.date) }}</td>
           <td>{{ i === 0 ? formatCurrency(row.balance) : '-' }}</td>
-          <td>{{ formatCurrency(row.balance) }}</td>
+          <td>{{ formatCurrency(row.balance + row.interestAccumulated) }}</td>
           <td>{{ row.installmentNumber ? '#' + row.installmentNumber : '-' }}</td>
-          <td>{{ formatCurrency(row.interest + row.amortization) }}</td>
+          <td>{{ formatCurrency(row.interestPaid + row.amortization) }}</td>
           <td>{{ formatCurrency(row.amortization) }}</td>
           <td>{{ formatCurrency(row.balance) }}</td>
-          <td>{{ formatCurrency(row.interest) }}</td>
-          <td>{{ formatCurrency(row.interest) }}</td>
-          <td class="font-bold">{{ row.type === 'PAYMENT' ? formatCurrency(row.interest + row.amortization) : '-' }}</td>
+          <td>{{ formatCurrency(row.interestProvision) }}</td>
+          <td>{{ formatCurrency(row.interestAccumulated) }}</td>
+          <td class="font-bold">{{ row.type === 'PAYMENT' ? formatCurrency(row.interestPaid) : '-' }}</td>
         </tr>
       </tbody>
     </table>

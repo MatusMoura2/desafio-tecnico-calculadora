@@ -20,8 +20,14 @@ public record ScheduleRowDTO(
         @Schema(description = "Quantidade de dias no período", example = "30")
         Long days,
 
-        @Schema(description = "Valor dos juros no período", example = "16.52")
-        BigDecimal interest,
+        @Schema(description = "Valor da provisão de juros do período", example = "16.52")
+        BigDecimal interestProvision,
+
+        @Schema(description = "Valor dos juros acumulados até o evento", example = "16.52")
+        BigDecimal interestAccumulated,
+
+        @Schema(description = "Valor dos juros pagos neste evento", example = "16.52")
+        BigDecimal interestPaid,
 
         @Schema(description = "Valor da amortização", example = "1666.67")
         BigDecimal amortization,

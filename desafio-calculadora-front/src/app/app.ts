@@ -18,6 +18,14 @@ export class App {
   constructor(private calculatorService: LoanCalculatorService) {}
 
   public onCalculate(input: LoanInput): void {
-    this.calculationResult.set(this.calculatorService.calculate(input));
+    this.calculatorService.calculate(input).subscribe({
+      next: (result) => {
+        this.calculationResult.set(result);
+      },
+      error: (err) => {
+        console.error('Erro ao calcular no backend', err);
+        // Opcional: mostrar uma mensagem de erro na tela
+      }
+    });
   }
 }

@@ -28,8 +28,14 @@ public class ScheduleRowEntity {
     @Column(name = "days", nullable = false)
     private Long days;
 
-    @Column(name = "interest", nullable = false, precision = 15, scale = 2)
-    private BigDecimal interest;
+    @Column(name = "interest_provision", nullable = false, precision = 15, scale = 2)
+    private BigDecimal interestProvision;
+
+    @Column(name = "interest_accumulated", nullable = false, precision = 15, scale = 2)
+    private BigDecimal interestAccumulated;
+
+    @Column(name = "interest_paid", nullable = false, precision = 15, scale = 2)
+    private BigDecimal interestPaid;
 
     @Column(name = "amortization", nullable = false, precision = 15, scale = 2)
     private BigDecimal amortization;
@@ -40,14 +46,16 @@ public class ScheduleRowEntity {
     public ScheduleRowEntity() {
     }
 
-    public ScheduleRowEntity(Long id, LoanEntity loan, LocalDate date, String type, Integer installmentNumber, Long days, BigDecimal interest, BigDecimal amortization, BigDecimal balance) {
+    public ScheduleRowEntity(Long id, LoanEntity loan, LocalDate date, String type, Integer installmentNumber, Long days, BigDecimal interestProvision, BigDecimal interestAccumulated, BigDecimal interestPaid, BigDecimal amortization, BigDecimal balance) {
         this.id = id;
         this.loan = loan;
         this.date = date;
         this.type = type;
         this.installmentNumber = installmentNumber;
         this.days = days;
-        this.interest = interest;
+        this.interestProvision = interestProvision;
+        this.interestAccumulated = interestAccumulated;
+        this.interestPaid = interestPaid;
         this.amortization = amortization;
         this.balance = balance;
     }
@@ -100,12 +108,28 @@ public class ScheduleRowEntity {
         this.days = days;
     }
 
-    public BigDecimal getInterest() {
-        return interest;
+    public BigDecimal getInterestProvision() {
+        return interestProvision;
     }
 
-    public void setInterest(BigDecimal interest) {
-        this.interest = interest;
+    public void setInterestProvision(BigDecimal interestProvision) {
+        this.interestProvision = interestProvision;
+    }
+
+    public BigDecimal getInterestAccumulated() {
+        return interestAccumulated;
+    }
+
+    public void setInterestAccumulated(BigDecimal interestAccumulated) {
+        this.interestAccumulated = interestAccumulated;
+    }
+
+    public BigDecimal getInterestPaid() {
+        return interestPaid;
+    }
+
+    public void setInterestPaid(BigDecimal interestPaid) {
+        this.interestPaid = interestPaid;
     }
 
     public BigDecimal getAmortization() {

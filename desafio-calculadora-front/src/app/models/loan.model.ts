@@ -13,7 +13,9 @@ export interface ScheduleRow {
   type: ScheduleRowType;
   installmentNumber?: number;
   days: number;
-  interest: number;
+  interestProvision: number;
+  interestAccumulated: number;
+  interestPaid: number;
   amortization: number;
   balance: number;
 }

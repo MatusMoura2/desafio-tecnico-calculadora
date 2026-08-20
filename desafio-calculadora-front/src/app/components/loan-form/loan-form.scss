@@ -14,8 +14,7 @@
     align-items: flex-end;
     gap: 1.25rem;
     width: 100%;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    flex-wrap: wrap;
     padding-bottom: 0.25rem;
   }
 
@@ -70,6 +69,26 @@
       .suffix {
         position: absolute;
         right: 0.6rem;
+        font-size: 0.85rem;
+        color: #64748b;
+        font-weight: 500;
+        pointer-events: none;
+      }
+    }
+
+    .input-prefix {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .form-control {
+        width: 100%;
+        padding-left: 2rem;
+      }
+
+      .prefix {
+        position: absolute;
+        left: 0.6rem;
         font-size: 0.85rem;
         color: #64748b;
         font-weight: 500;

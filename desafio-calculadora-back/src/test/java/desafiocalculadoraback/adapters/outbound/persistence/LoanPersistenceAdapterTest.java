@@ -41,9 +41,9 @@ class LoanPersistenceAdapterTest {
     @Test
     void shouldSaveAndFindLoanResultInDatabase() {
         Loan loan = new Loan(null, LocalDate.of(2024, 1, 1), LocalDate.of(2024, 6, 30), LocalDate.of(2024, 1, 31), new BigDecimal("10000.00"), new BigDecimal("2.00"));
-        ScheduleRow row1 = new ScheduleRow(LocalDate.of(2024, 1, 1), "INITIAL", null, 0L, BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP), BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP), new BigDecimal("10000.00"));
-        ScheduleRow row2 = new ScheduleRow(LocalDate.of(2024, 1, 31), "PAYMENT", 1, 30L, new BigDecimal("16.52"), new BigDecimal("1666.67"), new BigDecimal("8333.33"));
-        LoanResult loanResult = new LoanResult(loan, 6, new BigDecimal("57.90"), List.of(row1, row2));
+        ScheduleRow row1 = new ScheduleRow(LocalDate.of(2024, 1, 1), "INITIAL", null, 0L, new BigDecimal("0.00"), new BigDecimal("0.00"), new BigDecimal("0.00"), new BigDecimal("0.00"), new BigDecimal("10000.00"));
+        ScheduleRow row2 = new ScheduleRow(LocalDate.of(2024, 1, 31), "PAYMENT", 1, 30L, new BigDecimal("16.52"), new BigDecimal("0.00"), new BigDecimal("16.52"), new BigDecimal("1666.67"), new BigDecimal("8333.33"));
+        LoanResult loanResult = new LoanResult(loan, 5, new BigDecimal("57.90"), List.of(row1, row2));
 
         LoanResult savedResult = adapter.save(loanResult);
 
@@ -55,6 +55,6 @@ class LoanPersistenceAdapterTest {
 
         assertTrue(foundResult.isPresent());
         assertEquals(savedResult.getLoan().getId(), foundResult.get().getLoan().getId());
-        assertEquals(6, foundResult.get().getInstallmentsCount());
+        assertEquals(5, foundResult.get().getInstallmentsCount());
     }
 }
