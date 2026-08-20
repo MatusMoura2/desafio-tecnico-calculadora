@@ -15,7 +15,7 @@ A aplicação foi inteiramente "containerizada", o que significa que você não 
    ```
 3. Aguarde o download e o build (pode levar alguns minutos na primeira execução). 
 4. Quando os containers estiverem ativos, acesse:
-   - **Frontend (Aplicação Web):** [http://localhost:4200](http://localhost)
+   - **Frontend (Aplicação Web):** [http://localhost](http://localhost)
    - **Backend API (Swagger):** [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 Para parar e remover os containers, execute:
