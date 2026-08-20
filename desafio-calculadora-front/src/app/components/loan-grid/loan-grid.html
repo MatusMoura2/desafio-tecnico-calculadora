@@ -1,0 +1,44 @@
+<div *ngIf="result" class="loan-grid-container">
+  <div class="summary-cards">
+    <div class="card">
+      <span class="card-label">Total de Parcelas</span>
+      <span class="card-value">{{ result.installmentsCount }}</span>
+    </div>
+    <div class="card">
+      <span class="card-label">Juros Acumulados</span>
+      <span class="card-value text-accent">{{ formatCurrency(result.totalInterest) }}</span>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="grid-table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Tipo / Evento</th>
+          <th>Nº Parcela</th>
+          <th>Dias Decorridos</th>
+          <th>Juros</th>
+          <th>Amortização</th>
+          <th>Saldo Devedor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of result.schedule" [class.highlight-row]="row.type === 'PAYMENT'">
+          <td class="font-medium">{{ formatDateString(row.date) }}</td>
+          <td>
+            <span class="badge" [ngClass]="getRowBadgeClass(row.type)">
+              {{ getRowLabel(row.type) }}
+            </span>
+          </td>
+          <td>{{ row.installmentNumber ? '#' + row.installmentNumber : '-' }}</td>
+          <td>{{ row.days }} d</td>
+          <td>{{ formatCurrency(row.interest) }}</td>
+          <td>{{ formatCurrency(row.amortization) }}</td>
+          <td class="font-bold">{{ formatCurrency(row.balance) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
