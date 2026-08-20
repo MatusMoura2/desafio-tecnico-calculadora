@@ -13,32 +13,39 @@
   <div class="table-responsive">
     <table class="grid-table">
       <thead>
-        <tr>
-          <th>Data</th>
-          <th>Tipo / Evento</th>
-          <th>Nº Parcela</th>
-          <th>Dias Decorridos</th>
-          <th>Juros</th>
-          <th>Amortização</th>
+        <tr class="header-group-row">
+          <th colspan="3" class="group-header group-loan">Empréstimo</th>
+          <th colspan="2" class="group-header group-installment">Parcela</th>
+          <th colspan="2" class="group-header group-principal">Principal</th>
+          <th colspan="3" class="group-header group-interest">Juros</th>
+        </tr>
+        <tr class="header-sub-row">
+          <th>Data Competência</th>
+          <th>Valor de Empréstimo</th>
           <th>Saldo Devedor</th>
+          <th>Consolidada</th>
+          <th>Total</th>
+          <th>Amortização</th>
+          <th>Saldo</th>
+          <th>Provisão</th>
+          <th>Acumulado</th>
+          <th>Pago</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let row of result.schedule" [class.highlight-row]="row.type === 'PAYMENT'">
+        <tr *ngFor="let row of result.schedule; let i = index" [class.highlight-row]="row.type === 'PAYMENT'">
           <td class="font-medium">{{ formatDateString(row.date) }}</td>
-          <td>
-            <span class="badge" [ngClass]="getRowBadgeClass(row.type)">
-              {{ getRowLabel(row.type) }}
-            </span>
-          </td>
+          <td>{{ i === 0 ? formatCurrency(row.balance) : '-' }}</td>
+          <td>{{ formatCurrency(row.balance) }}</td>
           <td>{{ row.installmentNumber ? '#' + row.installmentNumber : '-' }}</td>
-          <td>{{ row.days }} d</td>
-          <td>{{ formatCurrency(row.interest) }}</td>
+          <td>{{ formatCurrency(row.interest + row.amortization) }}</td>
           <td>{{ formatCurrency(row.amortization) }}</td>
-          <td class="font-bold">{{ formatCurrency(row.balance) }}</td>
+          <td>{{ formatCurrency(row.balance) }}</td>
+          <td>{{ formatCurrency(row.interest) }}</td>
+          <td>{{ formatCurrency(row.interest) }}</td>
+          <td class="font-bold">{{ row.type === 'PAYMENT' ? formatCurrency(row.interest + row.amortization) : '-' }}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-

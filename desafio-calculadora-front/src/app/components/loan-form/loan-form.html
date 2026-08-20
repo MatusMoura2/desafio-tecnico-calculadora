@@ -1,28 +1,37 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="loan-form">
-  <div class="form-grid">
+  <div class="form-row">
     <div class="form-group">
-      <label for="initialDate">Data inicial *</label>
+      <label for="initialDate">Data Inicial</label>
       <input id="initialDate" type="date" formControlName="initialDate" class="form-control" />
     </div>
 
     <div class="form-group">
-      <label for="finalDate">Data final *</label>
+      <label for="finalDate">Data Final</label>
       <input id="finalDate" type="date" formControlName="finalDate" class="form-control" />
     </div>
 
     <div class="form-group">
-      <label for="firstPaymentDate">Primeiro Pagamento *</label>
+      <label for="firstPaymentDate">Primeiro Pagamento</label>
       <input id="firstPaymentDate" type="date" formControlName="firstPaymentDate" class="form-control" />
     </div>
 
     <div class="form-group">
-      <label for="amount">Valor do empréstimo (R$) *</label>
-      <input id="amount" type="number" step="0.01" min="0" placeholder="Ex: 10000" formControlName="amount" class="form-control" />
+      <label for="amount">Valor de Empréstimo</label>
+      <input id="amount" type="number" step="0.01" min="0" placeholder="140.000,00" formControlName="amount" class="form-control" />
     </div>
 
-    <div class="form-group">
-      <label for="interestRate">Taxa de juros (%) *</label>
-      <input id="interestRate" type="number" step="0.01" min="0" placeholder="Ex: 2.5" formControlName="interestRate" class="form-control" />
+    <div class="form-group form-group-sm">
+      <label for="interestRate">Taxa de Juros</label>
+      <div class="input-suffix">
+        <input id="interestRate" type="number" step="0.01" min="0" placeholder="7" formControlName="interestRate" class="form-control" />
+        <span class="suffix">%</span>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="form.invalid" class="btn-submit">
+        Calcular
+      </button>
     </div>
   </div>
 
@@ -33,11 +42,5 @@
     <div *ngIf="form.errors['firstPaymentDateInvalid']" class="error-message">
       {{ form.errors['firstPaymentDateInvalid'] }}
     </div>
-  </div>
-
-  <div class="form-actions">
-    <button type="submit" [disabled]="form.invalid" class="btn-submit">
-      Calcular
-    </button>
   </div>
 </form>
