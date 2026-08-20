@@ -1,2 +1,36 @@
-<router-outlet />
+<div class="app-layout">
+  <header class="app-header">
+    <div class="header-content">
+      <div class="brand">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="brand-icon">
+          <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+          <line x1="8" y1="6" x2="16" y2="6"></line>
+          <line x1="16" y1="14" x2="16" y2="18"></line>
+          <path d="M16 10h.01"></path>
+          <path d="M12 10h.01"></path>
+          <path d="M8 10h.01"></path>
+          <path d="M12 14h.01"></path>
+          <path d="M8 14h.01"></path>
+          <path d="M12 18h.01"></path>
+          <path d="M8 18h.01"></path>
+        </svg>
+        <div>
+          <h1>Calculadora de Empréstimos</h1>
+          <p class="subtitle">Simulação e Cronograma Detalhado de Parcelas</p>
+        </div>
+      </div>
+    </div>
+  </header>
 
+  <main class="app-main">
+    <section class="section-form">
+      <h2 class="section-title">Parâmetros do Financiamento</h2>
+      <app-loan-form (calculate)="onCalculate($event)"></app-loan-form>
+    </section>
+
+    <section *ngIf="calculationResult()" class="section-results">
+      <h2 class="section-title">Cronograma de Parcelas</h2>
+      <app-loan-grid [result]="calculationResult()"></app-loan-grid>
+    </section>
+  </main>
+</div>
