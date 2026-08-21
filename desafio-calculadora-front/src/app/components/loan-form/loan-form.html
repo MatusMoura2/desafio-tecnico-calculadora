@@ -19,7 +19,7 @@
       <label for="amount">Valor de Empréstimo</label>
       <div class="input-prefix">
         <span class="prefix">R$</span>
-        <input id="amount" type="number" step="0.01" min="0" placeholder="140000,00" formControlName="amount" class="form-control" />
+        <input id="amount" type="text" placeholder="140000,00" formControlName="amountDisplay" (blur)="onAmountBlur()" class="form-control" />
       </div>
     </div>
 
