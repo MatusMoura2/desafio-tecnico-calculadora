@@ -79,7 +79,9 @@ public class LoanCalculatorDomainService implements CalculateLoanUseCase {
                 double rate = loan.getInterestRate().doubleValue() / 100.0;
                 double fraction = (double) days / 360.0;
                 double factor = Math.pow(1.0 + rate, fraction) - 1.0;
-                BigDecimal currentInterest = balance.multiply(BigDecimal.valueOf(factor));
+                
+                BigDecimal baseForInterest = balance.add(accumulatedInterest);
+                BigDecimal currentInterest = baseForInterest.multiply(BigDecimal.valueOf(factor));
 
                 accumulatedInterest = accumulatedInterest.add(currentInterest);
                 totalInterest = totalInterest.add(currentInterest);

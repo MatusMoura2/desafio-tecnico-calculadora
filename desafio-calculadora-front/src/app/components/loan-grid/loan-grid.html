@@ -36,7 +36,7 @@
         <tr *ngFor="let row of result.schedule; let i = index" [class.highlight-row]="row.type === 'PAYMENT'">
           <td class="font-medium">{{ formatDateString(row.date) }}</td>
           <td>{{ i === 0 ? formatCurrency(row.balance) : '-' }}</td>
-          <td>{{ formatCurrency(row.balance + row.interestAccumulated) }}</td>
+          <td>{{ formatCurrency(row.balance + (row.type === 'PAYMENT' ? 0 : row.interestAccumulated)) }}</td>
           <td>{{ row.installmentNumber ? '#' + row.installmentNumber : '-' }}</td>
           <td>{{ formatCurrency(row.interestPaid + row.amortization) }}</td>
           <td>{{ formatCurrency(row.amortization) }}</td>
